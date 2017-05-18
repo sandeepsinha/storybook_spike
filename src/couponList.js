@@ -1,9 +1,16 @@
 import React from 'react';
+import { fetchCoupons } from './actions/coupons'
+import { connect } from 'react-redux'
 
 class CouponList extends React.Component {
+
+  componentWillMount(){
+    this.props.dispatch(fetchCoupons())
+
+  }
   
-  render() {
-  	let couponList = this.props.couponList;
+  render() { console.log('aaa **** '+this.props.coupons);
+  	let couponList = this.props.coupons;
     let coupons = [];
 
   	if(!couponList){
@@ -26,4 +33,9 @@ class CouponList extends React.Component {
   }
 }
 
-export default CouponList;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return state;
+}
+
+export default connect(mapStateToProps)(CouponList);
